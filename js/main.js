@@ -1,4 +1,4 @@
-// Trigger the "paint-in" underline animation on section headings
+/// Trigger the "paint-in" underline animation on section headings
 // the first time each one scrolls into view.
 document.addEventListener("DOMContentLoaded", () => {
   const headings = document.querySelectorAll("h2");
@@ -18,6 +18,11 @@ document.addEventListener("DOMContentLoaded", () => {
       });
     },
     { threshold: 0.4 }
+  );
+
+  headings.forEach((h) => observer.observe(h));
+});
+
   );
 
   headings.forEach((h) => observer.observe(h));
