@@ -1,4 +1,4 @@
-/// Trigger the "paint-in" underline animation on section headings
+// Trigger the "paint-in" underline animation on section headings
 // the first time each one scrolls into view.
 document.addEventListener("DOMContentLoaded", () => {
   const headings = document.querySelectorAll("h2");
@@ -23,7 +23,29 @@ document.addEventListener("DOMContentLoaded", () => {
   headings.forEach((h) => observer.observe(h));
 });
 
-  );
+// Mobile menu: abre/fecha o painel de navegação no botão hambúrguer
+document.addEventListener("DOMContentLoaded", () => {
+  const navToggle = document.querySelector(".nav-toggle");
+  const nav = document.getElementById("primary-nav");
+  if (!navToggle || !nav) return;
 
-  headings.forEach((h) => observer.observe(h));
+  const closeMenu = () => {
+    nav.classList.remove("is-open");
+    navToggle.setAttribute("aria-expanded", "false");
+  };
+
+  navToggle.addEventListener("click", () => {
+    const isOpen = nav.classList.toggle("is-open");
+    navToggle.setAttribute("aria-expanded", String(isOpen));
+  });
+
+  // Fecha o menu ao clicar em um link (rolagem para a seção)
+  nav.querySelectorAll("a").forEach((link) => {
+    link.addEventListener("click", closeMenu);
+  });
+
+  // Fecha o menu se a tela for redimensionada para desktop
+  window.addEventListener("resize", () => {
+    if (window.innerWidth > 780) closeMenu();
+  });
 });
