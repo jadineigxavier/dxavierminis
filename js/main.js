@@ -46,6 +46,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Fecha o menu se a tela for redimensionada para desktop
   window.addEventListener("resize", () => {
-    if (window.innerWidth > 780) closeMenu();
+    if (window.innerWidth > 1024) closeMenu();
   });
 });
