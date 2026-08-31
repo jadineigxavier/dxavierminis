@@ -30,6 +30,7 @@ body {
   margin: 0;
   overflow-x: hidden;
   width: 100%;
+  padding-top: 84px;
   background: var(--ink);
   color: var(--bone);
   font-family: var(--body);
@@ -58,8 +59,10 @@ img { max-width: 100%; display: block; }
    Header
    ============================================ */
 .site-header {
-  position: sticky;
+  position: fixed;
   top: 0;
+  left: 0;
+  width: 100%;
   z-index: 100;
   display: flex;
   align-items: center;
@@ -154,6 +157,7 @@ img { max-width: 100%; display: block; }
 .nav-toggle[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
 @media (max-width: 1024px) {
+  body { padding-top: 68px; }
   .site-header { padding: 14px 5vw; }
   .nav-toggle { display: flex; }
 
@@ -202,6 +206,7 @@ img { max-width: 100%; display: block; }
 
 /* Telas bem estreitas: evita que logo + botão hambúrguer apertem demais */
 @media (max-width: 420px) {
+  body { padding-top: 60px; }
   .site-header { gap: 10px; padding: 12px 5vw; }
   .logo { font-size: 1.5rem; }
 }
@@ -516,70 +521,40 @@ h2 {
 /* ============================================
    Shop
    ============================================ */
-.shop-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 24px;
-}
-
-.product-card {
-  background: var(--charcoal);
+.shop-cta {
+  display: block;
+  position: relative;
+  background: linear-gradient(180deg, rgba(27,23,20,0.55) 0%, rgba(27,23,20,0.88) 55%, rgba(27,23,20,0.98) 100%), url('../assets/images/demonio.jpeg');
+  background-size: cover;
+  background-position: center 25%;
   border: 1px solid var(--line);
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-
-.product-card img {
-  width: 100%;
-  aspect-ratio: 1/1;
-  object-fit: cover;
-  transition: transform 0.5s ease;
-}
-.product-card:hover img { transform: scale(1.05); }
-
-.product-info { padding: 20px 22px 24px; }
-
-.product-info h3 {
-  font-family: var(--display);
-  font-size: 1.05rem;
-  margin: 0 0 8px;
-}
-
-.product-desc {
-  font-size: 0.88rem;
-  color: var(--bone-dim);
-  margin: 0 0 18px;
-}
-
-.product-footer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
-}
-
-.price-tag-inline {
-  font-family: var(--mono);
-  color: var(--brass-bright);
-  font-size: 1rem;
-}
-
-.product-card-ghost {
-  border-style: dashed;
-  align-items: center;
-  justify-content: center;
-  display: flex;
-}
-.product-ghost-inner {
-  padding: 40px 26px;
+  padding: 60px 5vw;
   text-align: center;
+  text-decoration: none;
+  transition: border-color 0.3s ease, transform 0.3s ease;
 }
-.product-ghost-inner p:first-child { color: var(--brass); margin-bottom: 10px; }
-.product-ghost-inner p:nth-child(2) {
+.shop-cta:hover {
+  border-color: var(--brass);
+  transform: translateY(-2px);
+}
+
+.shop-cta-tag {
+  color: var(--brass-bright);
+  letter-spacing: 0.08em;
+  margin: 0 0 10px;
+}
+
+.shop-cta h3 {
+  font-family: var(--display);
+  font-size: 1.8rem;
+  color: var(--bone);
+  margin: 0 0 14px;
+}
+
+.shop-cta-desc {
   color: var(--bone-dim);
-  font-size: 0.88rem;
-  margin: 0 0 20px;
+  max-width: 520px;
+  margin: 0 auto 30px;
 }
 
 /* ============================================
