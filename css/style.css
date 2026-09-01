@@ -2,7 +2,7 @@
    DXavier Minis — design tokens
    ============================================ */
 :root {
-  --ink: #100d0c;
+  --ink: #e3b6a7;
   --charcoal: #1b1714;
   --charcoal-2: #221c18;
   --line: #342c25;
@@ -336,19 +336,50 @@ h2.in-view .brush-underline::after { animation-play-state: running; }
 .intro {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 24px;
-  padding: 40px 5vw;
+  padding: 46px 5vw;
   background: var(--charcoal);
   border-bottom: 1px solid var(--line);
 }
+.intro-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 4px 28px;
+  border-left: 1px solid var(--line);
+}
+.intro-item:first-child { border-left: none; padding-left: 0; }
+
+.intro-num {
+  flex-shrink: 0;
+  font-size: 1.3rem;
+  font-weight: 500;
+  color: var(--brass);
+  line-height: 1;
+  padding-top: 2px;
+}
+
 .intro p {
   margin: 0;
   font-size: 0.92rem;
   color: var(--bone-dim);
 }
-.intro .mono {
-  color: var(--brass);
-  margin-right: 10px;
+.intro p strong {
+  display: block;
+  margin-bottom: 4px;
+  font-family: var(--display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--bone);
+}
+
+@media (max-width: 700px) {
+  .intro { padding: 8px 5vw; }
+  .intro-item {
+    border-left: none;
+    border-top: 1px solid var(--line);
+    padding: 22px 0;
+  }
+  .intro-item:first-child { border-top: none; }
 }
 
 /* ============================================
@@ -431,6 +462,98 @@ h2 {
   font-size: 0.95rem;
   color: var(--bone);
 }
+
+.gallery-trigger {
+  display: block;
+  width: 100%;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  position: relative;
+}
+.gallery-trigger img { display: block; }
+.gallery-trigger::after {
+  content: "Ver detalhes";
+  position: absolute;
+  inset: auto 0 0 0;
+  padding: 10px 0;
+  text-align: center;
+  font-family: var(--mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--bone);
+  background: linear-gradient(to top, rgba(16,13,12,0.88), transparent);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+.gallery-trigger:hover::after,
+.gallery-trigger:focus-visible::after { opacity: 1; }
+
+.lightbox {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6vh 5vw;
+}
+.lightbox[hidden] { display: none; }
+
+.lightbox-backdrop {
+  position: absolute;
+  inset: 0;
+  background: rgba(16, 13, 12, 0.92);
+}
+
+.lightbox-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  max-width: 880px;
+  max-height: 88vh;
+  overflow-y: auto;
+  background: var(--charcoal);
+  border: 1px solid var(--line);
+}
+
+.lightbox-img {
+  display: block;
+  width: 100%;
+  max-height: 62vh;
+  object-fit: contain;
+  background: var(--ink);
+}
+
+.lightbox-caption { padding: 18px 24px 26px; }
+.lightbox-caption p {
+  margin: 10px 0 0;
+  color: var(--bone);
+  font-size: 1rem;
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  z-index: 2;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: rgba(16, 13, 12, 0.75);
+  color: var(--bone);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+.lightbox-close:hover { border-color: var(--brass); color: var(--brass-bright); }
+
+body.lightbox-open { overflow: hidden; }
 
 .gallery-note {
   margin-top: 36px;
@@ -531,11 +654,6 @@ h2 {
   padding: 60px 5vw;
   text-align: center;
   text-decoration: none;
-  transition: border-color 0.3s ease, transform 0.3s ease;
-}
-.shop-cta:hover {
-  border-color: var(--brass);
-  transform: translateY(-2px);
 }
 
 .shop-cta-tag {
